@@ -19,11 +19,7 @@ router.get(
 router.post('/', UserController.newUser)
 
 //Edit one user
-router.patch(
-  '/:id([0-9]+)',
-  [checkJwt, checkRole(['ADMIN'])],
-  UserController.editUser
-)
+router.patch('/:id([0-9]+)', [checkJwt], UserController.editUser)
 
 //Delete one user
 router.delete(

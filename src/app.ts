@@ -11,6 +11,4 @@ app.use(cors())
 app.disable('x-powered-by')
 app.use('/', routes)
 
-app.listen(process.env.PORT, () => {
-  console.log('server is running')
-})
+export default app
