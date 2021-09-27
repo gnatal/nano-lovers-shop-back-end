@@ -11,12 +11,12 @@ export default class createUserService {
   execute = async ({
     username,
     password,
-    role,
+    email,
   }): Promise<errorContract | successContract> => {
     const user = new User()
     user.username = username
     user.password = password
-    user.role = role
+    user.email = email
     const errors = await validate(user)
     if (errors.length > 0) {
       return {

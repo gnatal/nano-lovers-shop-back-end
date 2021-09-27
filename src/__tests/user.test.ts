@@ -19,8 +19,9 @@ describe('Test the root user path', () => {
   test('It should response the POST method', async () => {
     const response = await supertest(app).post('/user').send({
       username: 'guilherme nalinee',
-      role: 'user',
+      email: 'guilhermenatal47@gmail.com',
       password: '12354678',
+      passwordConfirmation: '12345678',
     })
     expect(response.statusCode).toBe(201)
   })

@@ -17,7 +17,7 @@ class UserController {
     //Get users from database
     const userRepository = getRepository(User)
     const users = await userRepository.find({
-      select: ['id', 'username', 'role'], //We dont want to send the passwords on response
+      select: ['id', 'username', 'email'],
     })
 
     //Send the users object
@@ -32,7 +32,7 @@ class UserController {
     const userRepository = getRepository(User)
     try {
       const user = await userRepository.findOneOrFail(id, {
-        select: ['id', 'username', 'role'], //We dont want to send the password on response
+        select: ['id', 'username', 'email'],
       })
     } catch (error) {
       res.status(404).send('User not found')
@@ -40,9 +40,15 @@ class UserController {
   }
 
   static newUser = async (req: Request, res: Response) => {
-    const { username, password, role } = req.body
+    const { username, password, email, passwordConfirmation } = req.body
+
+    if (password != passwordConfirmation) {
+      res.json('Password mismatch').status(400).send()
+      return
+    }
+
     const userService = new createUserService()
-    const result = await userService.execute({ username, password, role })
+    const result = await userService.execute({ username, password, email })
     if (isSuccessContract(result)) {
       const authToken = encode({
         userId: (result as successContract).data.id,
