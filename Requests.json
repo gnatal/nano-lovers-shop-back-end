@@ -1,0 +1,119 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "NanoLovers",
+  "dateExported": "2021-09-28T01:05:23.002Z",
+  "version": "1.1",
+  "folders": [
+    {
+      "containerId": "",
+      "sortNum": 10000,
+      "name": "User",
+      "_id": "cbc7ec28-00c2-4daf-baa7-be6b7acc0f50",
+      "created": "2021-09-27T18:42:48.071Z"
+    }
+  ],
+  "requests": [
+    {
+      "containerId": "cbc7ec28-00c2-4daf-baa7-be6b7acc0f50",
+      "sortNum": 10000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "43560063-9fe1-4209-85d2-b96a611be697",
+      "name": "get",
+      "url": "http://localhost:3000/user",
+      "method": "GET",
+      "modified": "2021-09-27T18:42:49.700Z",
+      "created": "2021-09-27T13:06:57.532Z",
+      "_id": "25e54e9d-a272-42bb-8748-5ed894ce6be1",
+      "params": [],
+      "tests": []
+    },
+    {
+      "containerId": "cbc7ec28-00c2-4daf-baa7-be6b7acc0f50",
+      "sortNum": 20000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "43560063-9fe1-4209-85d2-b96a611be697",
+      "name": "create",
+      "url": "http://localhost:3000/user",
+      "method": "POST",
+      "modified": "2021-09-27T18:42:50.688Z",
+      "created": "2021-09-27T18:41:29.124Z",
+      "_id": "89dd9f30-7efe-4e41-8f69-7f8aef4f7009",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"username\":\"guilherme v r nat\",\n    \"password\":\"12345678\",\n    \"email\":\"guilhermenatal47@gmail.com\",\n    \"passwordConfirmation\":\"12345678\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "cbc7ec28-00c2-4daf-baa7-be6b7acc0f50",
+      "sortNum": 25000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "43560063-9fe1-4209-85d2-b96a611be697",
+      "name": "update",
+      "url": "http://localhost:3000/user?email=guilhermenatal47@gmail.com",
+      "method": "PATCH",
+      "modified": "2021-09-28T00:56:31.299Z",
+      "created": "2021-09-28T00:56:02.430Z",
+      "_id": "14693630-fe45-4c66-a0da-68d1d7ac4024",
+      "params": [
+        {
+          "name": "email",
+          "value": "guilhermenatal47@gmail.com",
+          "isPath": false
+        }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n    \"username\":\"guilherme v r natal\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "cbc7ec28-00c2-4daf-baa7-be6b7acc0f50",
+      "sortNum": 30000,
+      "headers": [
+        { "name": "Accept", "value": "*/*" },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "43560063-9fe1-4209-85d2-b96a611be697",
+      "name": "delete",
+      "url": "http://localhost:3000/user?email=guilhermenatal47@gmail.com",
+      "method": "DELETE",
+      "modified": "2021-09-27T18:53:15.732Z",
+      "created": "2021-09-27T18:43:30.079Z",
+      "_id": "44160957-c1d2-402b-9d91-5e390d073caf",
+      "params": [
+        {
+          "name": "email",
+          "value": "guilhermenatal47@gmail.com",
+          "isPath": false
+        }
+      ],
+      "tests": []
+    }
+  ]
+}
