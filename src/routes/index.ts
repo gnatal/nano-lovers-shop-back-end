@@ -1,12 +1,14 @@
 import { Router } from 'express'
-import auth from './routes/auth'
-import user from './routes/user'
-import service from './routes/service'
+import auth from './auth'
+import user from './user'
+import service from './service'
+import product from './product'
 
 const routes = Router()
 
 routes.use('/auth', auth)
 routes.use('/user', user)
 routes.use('/service', service)
+routes.use('/product', product)
 
 export default routes

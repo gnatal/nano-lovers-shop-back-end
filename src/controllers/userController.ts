@@ -64,6 +64,7 @@ class UserController {
     //Get the ID from the url
     const { email } = req.query
 
+
     //Get values from the body
     const { username } = req.body
 

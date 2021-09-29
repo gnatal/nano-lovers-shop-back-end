@@ -20,6 +20,9 @@ export class User {
   email: string
 
   @Column()
+  nanoAddress: string
+
+  @Column()
   @Length(4, 20)
   username: string
 

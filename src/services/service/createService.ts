@@ -34,7 +34,7 @@ export class createService {
       } as successContract
     } catch (e) {
       return {
-        status: 201,
+        status: 400,
         message: 'Error saving the service',
       } as errorContract
     }

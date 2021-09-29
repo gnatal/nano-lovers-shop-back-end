@@ -1,20 +1,20 @@
 import { getRepository } from 'typeorm'
-import { Service } from '../../entity/Service'
+import { Product } from '../../entity/Product'
 import {
   errorContract,
   successContract,
 } from '../../utils/serviceResponseContract'
 
-export class listService {
+export class listProductService {
   static execute = async () => {
-    const repository = getRepository(Service)
+    const repository = getRepository(Product)
 
     try {
-      const services = await repository.find()
+      const products = await repository.find()
 
       return {
         status: 200,
-        data: [...services],
+        data: [...products],
       } as successContract
     } catch (e) {
       return {
