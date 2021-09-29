@@ -6,7 +6,9 @@ import {
 } from '../../utils/serviceResponseContract'
 
 export class deleteService {
-  static execute = async (id: string) => {
+  static execute = async (
+    id: string
+  ): Promise<successContract | errorContract> => {
     const repository = getRepository(Service)
 
     try {

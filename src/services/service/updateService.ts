@@ -6,7 +6,13 @@ import {
 } from '../../utils/serviceResponseContract'
 
 export class updateService {
-  static execute = async ({ id, name, description, main_image, price }) => {
+  static execute = async ({
+    id,
+    name,
+    description,
+    main_image,
+    price,
+  }): Promise<successContract | errorContract> => {
     const repository = getRepository(Service)
 
     try {

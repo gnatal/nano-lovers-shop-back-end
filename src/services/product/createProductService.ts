@@ -7,7 +7,13 @@ import {
 import { validate } from 'class-validator'
 
 export class createProductService {
-  static execute = async ({ name, description, main_image, price, stock }) => {
+  static execute = async ({
+    name,
+    description,
+    main_image,
+    price,
+    stock,
+  }): Promise<successContract | errorContract> => {
     const product = new Product()
     product.name = name
     product.description = description

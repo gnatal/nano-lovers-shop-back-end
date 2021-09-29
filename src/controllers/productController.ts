@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import { Product } from '../entity/Product'
 import { createProductService } from '../services/product/createProductService'
 import { deleteProductService } from '../services/product/deleteProductService'
 import { getOneProductService } from '../services/product/getOneProductService'

@@ -6,7 +6,7 @@ import { User } from '../entity/User'
 import loginService from '../services/auth/loginService'
 
 class AuthController {
-  static login = async (req: Request, res: Response) => {
+  static login = async (req: Request, res: Response): Promise<void> => {
     //Check if username and password are set
     const { email, password } = req.body
     const result = await loginService.excute({ email, password })
@@ -17,7 +17,10 @@ class AuthController {
       .send()
   }
 
-  static changePassword = async (req: Request, res: Response) => {
+  static changePassword = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     //Get ID from JWT
     const id = res.locals.jwtPayload.userId
 

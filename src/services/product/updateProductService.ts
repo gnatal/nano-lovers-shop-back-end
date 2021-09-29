@@ -4,7 +4,6 @@ import {
   errorContract,
   successContract,
 } from '../../utils/serviceResponseContract'
-import { validate } from 'class-validator'
 
 export class updateProductService {
   static execute = async ({
@@ -14,7 +13,7 @@ export class updateProductService {
     main_image,
     price,
     stock,
-  }) => {
+  }): Promise<successContract | errorContract> => {
     const repository = getRepository(Product)
 
     try {

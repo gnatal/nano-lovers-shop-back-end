@@ -1,7 +1,6 @@
-import { User } from '../../entity/User'
-import * as jwt from 'jsonwebtoken'
-import { getRepository } from 'typeorm'
 import { validate } from 'class-validator'
+import { getRepository } from 'typeorm'
+import { User } from '../../entity/User'
 import {
   errorContract,
   successContract,
@@ -34,7 +33,7 @@ export default class createUserService {
       await userRepository.save(user)
       return {
         status: 201,
-        data: user,
+        data: { ...user },
       } as successContract
     } catch (e) {
       return {

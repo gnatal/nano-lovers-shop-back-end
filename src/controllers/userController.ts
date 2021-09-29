@@ -1,19 +1,16 @@
-import { Request, Response } from 'express'
 import { validate } from 'class-validator'
+import { Request, Response } from 'express'
 import { getRepository } from 'typeorm'
-import createUserService from '../services/user/createUserService'
-import {
-  errorContract,
-  successContract,
-  isErrorContractContract,
-  isSuccessContract,
-} from '../utils/serviceResponseContract'
-import { encode } from '../utils/JWT'
-
 import { User } from '../entity/User'
+import createUserService from '../services/user/createUserService'
+import { encode } from '../utils/JWT'
+import {
+  isSuccessContract,
+  successContract,
+} from '../utils/serviceResponseContract'
 
 class UserController {
-  static listAll = async (req: Request, res: Response) => {
+  static listAll = async (req: Request, res: Response): Promise<void> => {
     //Get users from database
     const userRepository = getRepository(User)
     const users = await userRepository.find({
@@ -21,10 +18,10 @@ class UserController {
     })
 
     //Send the users object
-    res.send(users)
+    res.status(200).send(users)
   }
 
-  static getOneById = async (req: Request, res: Response) => {
+  static getOneById = async (req: Request, res: Response): Promise<void> => {
     //Get the ID from the url
     const id: number | string = req.params.id
 
@@ -34,12 +31,18 @@ class UserController {
       const user = await userRepository.findOneOrFail(id, {
         select: ['id', 'username', 'email'],
       })
+      res
+        .status(200)
+        .json({ ...user })
+        .send()
+      return
     } catch (error) {
       res.status(404).send('User not found')
+      return
     }
   }
 
-  static newUser = async (req: Request, res: Response) => {
+  static newUser = async (req: Request, res: Response): Promise<void> => {
     const { username, password, email, passwordConfirmation } = req.body
 
     if (password != passwordConfirmation) {
@@ -48,22 +51,33 @@ class UserController {
     }
 
     const userService = new createUserService()
-    const result = await userService.execute({ username, password, email })
-    if (isSuccessContract(result)) {
-      const authToken = encode({
-        userId: (result as successContract).data.id,
-        username: (result as successContract).data.username,
-      })
-      res.status(result.status).json({ authToken }).send()
+    try {
+      const result = await userService.execute({ username, password, email })
+      if (isSuccessContract(result)) {
+        const authToken = encode({
+          userId: (result as successContract).data.id,
+          username: (result as successContract).data.username,
+        })
+        res.status(result.status).json({ authToken }).send()
+        return
+      }
+      res
+        .status(result.status)
+        .json({ ...result })
+        .send()
+      return
+    } catch (e) {
+      res
+        .status(400)
+        .json({ ...e })
+        .send()
       return
     }
-    res.status(result.status).json({ result }).send()
   }
 
-  static editUser = async (req: Request, res: Response) => {
+  static editUser = async (req: Request, res: Response): Promise<void> => {
     //Get the ID from the url
     const { email } = req.query
-
 
     //Get values from the body
     const { username } = req.body
@@ -99,7 +113,7 @@ class UserController {
     res.status(204).send()
   }
 
-  static deleteUser = async (req: Request, res: Response) => {
+  static deleteUser = async (req: Request, res: Response): Promise<void> => {
     //Get the ID from the url
     const { email } = req.query
 
@@ -113,7 +127,6 @@ class UserController {
       return
     }
 
-    //After all send a 204 (no content, but accepted) response
     res.status(204).send()
   }
 }
