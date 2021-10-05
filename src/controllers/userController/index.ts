@@ -1,24 +1,27 @@
 import { validate } from 'class-validator'
 import { Request, Response } from 'express'
 import { getRepository } from 'typeorm'
-import { User } from '../entity/User'
-import createUserService from '../services/user/createUserService'
-import { encode } from '../utils/JWT'
+import { User } from '../../entity/User'
+import createUserService from '../../services/user/createUserService'
+import { encode } from '../../utils/JWT'
 import {
   isSuccessContract,
   successContract,
-} from '../utils/serviceResponseContract'
+} from '../../utils/serviceResponseContract'
 
 class UserController {
   static listAll = async (req: Request, res: Response): Promise<void> => {
     //Get users from database
-    const userRepository = getRepository(User)
-    const users = await userRepository.find({
-      select: ['id', 'username', 'email'],
-    })
-
-    //Send the users object
-    res.status(200).send(users)
+    try {
+      const userRepository = getRepository(User)
+      const users = await userRepository.find({
+        select: ['id', 'username', 'email'],
+      })
+      //Send the users object
+      res.status(200).send()
+    } catch (e) {
+      res.status(400).send()
+    }
   }
 
   static getOneById = async (req: Request, res: Response): Promise<void> => {
