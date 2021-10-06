@@ -2,14 +2,20 @@ import { Response, Request } from 'express'
 import { getRepository } from 'typeorm'
 import { Order } from '../../entity/Order'
 
-export default class orderController {
+export class OrderController {
   static async index(req: Request, res: Response): Promise<void> {
     try {
-      console.log('running order controller')
+      const orderRepository = getRepository(Order)
+      const orders = orderRepository.find()
+      res
+        .json({ ...orders })
+        .status(200)
+        .send()
+      return
     } catch (e) {
       console.log(e)
+      return
     }
-    res.status(200).send()
   }
 
   static async create(req: Request, res: Response): Promise<void> {
